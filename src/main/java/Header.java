@@ -11,6 +11,7 @@ public class Header extends BasePage {
     private final By searchButton = By.id("nav-search-submit-button");
     private final By headerLinks = By.xpath("//*[@id='nav-xshop']//a");
 
+
     //Actions
 
     /**

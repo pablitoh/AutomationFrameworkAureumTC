@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'GIT_REPO', defaultValue: 'git@github.com:pablitoh/Qantastic.git', description: 'Git repository URL')
+        string(name: 'BRANCH', defaultValue: 'main', description: 'Branch to checkout')
+        string(name: 'BROWSER', defaultValue: 'chrome', description: 'Browser to run tests on')
+        booleanParam(name: 'REMOTE_WEBDRIVER', defaultValue: true, description: 'Use remote WebDriver')
+    }
+
+    environment {
+        GRADLE_OPTS = "-Dwebdriver.remote=${params.REMOTE_WEBDRIVER} -Dbrowser=${params.BROWSER}"
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                script {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: params.BRANCH]],
+                        userRemoteConfigs: [[url: params.GIT_REPO, credentialsId: 'your-ssh-credential-id']]
+                    ])
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    sh "./gradlew test ${GRADLE_OPTS}"
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: '**/build/reports/**', allowEmptyArchive: true
+        }
+        failure {
+            mail to: 'pabloconde88@gmail.com',
+                subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "Check Jenkins for details: ${env.BUILD_URL}"
+        }
+    }
+}

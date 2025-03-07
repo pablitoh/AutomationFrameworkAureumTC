@@ -37,8 +37,6 @@ public class DriverManager {
             System.err.println("Warning: Failed to load configuration file. Default values will be used.");
         }
 
-
-
         // Fetch properties from the properties file, with hardcoded defaults if not defined
         gridUrl = System.getProperty("grid.url", properties.getProperty("grid.url", "http://localhost:4444"));
         isRemote = Boolean.parseBoolean(System.getProperty("webdriver.remote",
