@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.framework'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.28.1'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.9.3'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+
+
+}
+tasks.test {
+    useJUnitPlatform()  // Enables JUnit 5 for Gradle
+    maxParallelForks = Runtime.runtime.availableProcessors()  // Best for utilizing CPU cores
+    testLogging {
+        events 'PASSED', 'FAILED', 'SKIPPED' // Optional: More detailed test event logs
+    }
+    systemProperties = System.getProperties()
+
+}
