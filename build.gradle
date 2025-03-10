@@ -19,7 +19,6 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured:5.4.0'
     testImplementation 'io.qameta.allure:allure-junit5:2.13.9'
 
-
 }
 tasks.test {
     useJUnitPlatform {

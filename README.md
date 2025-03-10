@@ -1,3 +1,8 @@
+Prerequisites
+• Java: Ensure that Java 8 or above is installed on your machine.
+• Gradle: Verify that Gradle 6.6 or above is installed.
+• Allure: Install Allure for generating test reports. Installation instructions can be found here.
+
 HOW TO RUN THE TESTS:
 
 Test can be run locally by running the command, this will grab the properties in the config.properties global file.
@@ -13,6 +18,11 @@ example: ./gradlew test -Denv=qa
 SELECT BROWSER (chrome/firefox):
 
 Example ./gradlew test -Dbrowser=firefox
+
+HEADLESS MODE (true/false):
+
+Example:
+./gradlew test -Dheadless=true
 
 SELECT TESTS By TAG:
 
@@ -34,3 +44,5 @@ To setup the docker container with 5 instances of each browser the grid just run
 docker-compose up -d --scale chromium-node=5 --scale firefox-node=5
 
 the default url is going http://localhost:4444 and you should use that as -Dgrid.url variable.
+
+
