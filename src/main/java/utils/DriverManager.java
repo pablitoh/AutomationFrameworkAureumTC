@@ -1,3 +1,5 @@
+package utils;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,8 +16,8 @@ import java.util.Properties;
 
 public class DriverManager {
 
-    private static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
     private static final String CONFIG_FILE_PATH = "src/test/resources/config.properties";
+    private static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
     private static String gridUrl;
     private static boolean isRemote;
     private static String defaultBrowser;

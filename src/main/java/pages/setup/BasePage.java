@@ -1,3 +1,5 @@
+package pages.setup;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -5,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.DriverManager;
 
 import java.time.Duration;
 import java.util.List;
@@ -12,15 +15,15 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class BasePage {
-    private final WebDriver driver; // WebDriver instance
     private static final int DEFAULT_TIMEOUT = 10; // Default timeout in seconds
+    private final WebDriver driver; // WebDriver instance
 
     // Constructor to initialize the WebDriver
     public BasePage() {
         this.driver = DriverManager.getDriver();
     }
-    public WebDriver getDriver()
-    {
+
+    public WebDriver getDriver() {
         return driver;
     }
 
@@ -56,6 +59,7 @@ public class BasePage {
         highLightElements(elements);
         return elements;
     }
+
     public List<WebElement> getElements(By locator) {
         return getElements(locator, DEFAULT_TIMEOUT);
     }
@@ -196,10 +200,8 @@ public class BasePage {
         js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');", element);
     }
 
-    private void highLightElements(List<WebElement> elements)
-    {
-        for(WebElement element : elements)
-        {
+    private void highLightElements(List<WebElement> elements) {
+        for (WebElement element : elements) {
             highlightElement(element);
         }
     }
@@ -209,8 +211,7 @@ public class BasePage {
      *
      * @return The title of the current page as a String.
      */
-    public String getTitle()
-    {
+    public String getTitle() {
         // Wait for the page to load ("document.readyState" to become "complete")
         new WebDriverWait(driver, Duration.ofSeconds(30))
                 .until((ExpectedCondition<Boolean>) wd ->
