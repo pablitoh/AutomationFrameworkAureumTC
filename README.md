@@ -51,7 +51,11 @@ Tests can also select whether if the browser will be run locally or remote in a 
 ```
 
 ## PROPERTY FILES & FIXTURES (Test Data):
-All the data is chosen depending on the environment variable passed in cli
+All the data is chosen depending on the environment variable passed in cli.
+
+If something is setup locally in the test data folder for the environment thaty will gain priority over the global properties of the config.properties file.
+
+- CLI commands override everything!!!
 
 
 ## Docker Instructions:
