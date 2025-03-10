@@ -22,7 +22,14 @@ dependencies {
 
 }
 tasks.test {
-    useJUnitPlatform()  // Enables JUnit 5 for Gradle
+    useJUnitPlatform {
+        if (project.hasProperty('includeTags')) {
+            includeTags project.includeTags.split(',')
+        }
+        if (project.hasProperty('excludeTags')) {
+            excludeTags project.excludeTags.split(',')
+        }
+    }  // Enables JUnit 5 for Gradle
     maxParallelForks = Runtime.runtime.availableProcessors()  // Best for utilizing CPU cores
     testLogging {
         events 'PASSED', 'FAILED', 'SKIPPED' // Optional: More detailed test event logs

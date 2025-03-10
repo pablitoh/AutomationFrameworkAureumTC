@@ -6,6 +6,7 @@ import setup.ValidUserTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("UI")
 @DisplayName("Inventory Tests")
 public class InventoryTests extends ValidUserTest {
 

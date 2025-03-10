@@ -13,10 +13,12 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("UI")
+@Tag("Cart")
 @DisplayName("Cart Tests")
 public class CartTests extends ValidUserTest {
+
     @Test
-    @Tag("Cart")
     @Description("Verify that specific products are present in the cart")
     @DisplayName("TC-0014 | Verify that specific products are present in the cart")
     public void verifySpecificProductsInCart() {
