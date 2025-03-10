@@ -1,3 +1,18 @@
-*.class
+# Gradle files
+.gradle/
+build/
 
-*.log
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Generated files
+out/
