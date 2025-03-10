@@ -21,6 +21,7 @@ public class DriverManager {
     private static String gridUrl;
     private static boolean isRemote;
     private static String defaultBrowser;
+    private static boolean isHeadless;
 
     static {
         // Load the configuration file and allow overriding via system properties
@@ -36,7 +37,7 @@ public class DriverManager {
             // Load properties from the file
             properties.load(fileInputStream);
         } catch (IOException e) {
-            System.err.println("Warning: Failed to load configuration file. Default values will be used.");
+            System.err.println("Configuration file could not be loaded, default settings will be used.");
         }
 
         // Fetch properties from the properties file, with hardcoded defaults if not defined
@@ -44,6 +45,8 @@ public class DriverManager {
         isRemote = Boolean.parseBoolean(System.getProperty("webdriver.remote",
                 properties.getProperty("webdriver.remote", "false")));
         defaultBrowser = System.getProperty("browser", properties.getProperty("browser", "chrome"));
+        isHeadless = Boolean.parseBoolean(System.getProperty("headless",
+                properties.getProperty("headless", "true")));
     }
 
     /**
@@ -68,12 +71,17 @@ public class DriverManager {
                         ChromeOptions options = new ChromeOptions();
                         options.addArguments("--no-sandbox");
                         options.addArguments("--disable-dev-shm-usage");
-                        options.addArguments("--headless=new");
-                        options.addArguments("--disable-gpu");
+                        if (isHeadless) {
+                            options.addArguments("--headless=new");
+                            options.addArguments("--disable-gpu");
+                        }
                         options.addArguments("--window-size=1920,1080");
                         driver = new RemoteWebDriver(new URL(gridUrl), options);
                     } else if (finalBrowser.equalsIgnoreCase("firefox")) {
                         FirefoxOptions options = new FirefoxOptions();
+                        if (isHeadless) {
+                            options.addArguments("-headless");
+                        }
                         driver = new RemoteWebDriver(new URL(gridUrl), options);
                     } else {
                         throw new IllegalArgumentException("Unsupported browser: " + finalBrowser);
@@ -84,7 +92,10 @@ public class DriverManager {
                         case "chrome":
                             WebDriverManager.chromedriver().setup();
                             ChromeOptions chromeOptions = new ChromeOptions();
-                            chromeOptions.addArguments("--disable-gpu");
+                            if (isHeadless) {
+                                chromeOptions.addArguments("--headless=new");
+                                chromeOptions.addArguments("--disable-gpu");
+                            }
                             chromeOptions.addArguments("--window-size=1920,1080");
                             chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
                             driver = new ChromeDriver(chromeOptions);
@@ -92,6 +103,9 @@ public class DriverManager {
                         case "firefox":
                             WebDriverManager.firefoxdriver().setup();
                             FirefoxOptions firefoxOptions = new FirefoxOptions();
+                            if (isHeadless) {
+                                firefoxOptions.addArguments("-headless");
+                            }
                             driver = new FirefoxDriver(firefoxOptions);
                             break;
                         default:

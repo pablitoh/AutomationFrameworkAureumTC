@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'GIT_REPO', defaultValue: 'git@github.com:pablitoh/Qantastic.git', description: 'Git repository URL')
+        string(name: 'GIT_REPO', defaultValue: 'git@github.com:pablitoh/AutomationFrameworkAureumTC.git, description: 'Git repository URL')
         string(name: 'BRANCH', defaultValue: 'main', description: 'Branch to checkout')
         string(name: 'BROWSER', defaultValue: 'chrome', description: 'Browser to run tests on')
         booleanParam(name: 'REMOTE_WEBDRIVER', defaultValue: true, description: 'Use remote WebDriver')

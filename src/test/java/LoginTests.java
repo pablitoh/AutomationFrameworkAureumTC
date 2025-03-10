@@ -10,11 +10,12 @@ import utils.TestDataManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("UI")
+@Tag("Login")
 @DisplayName("Login Tests")
 public class LoginTests extends BaseTest {
 
     @Test
-    @Tag("Login")
     @DisplayName("TC-0001 | Verify login")
     public void verifyLogin() {
         LandingPage home = new LandingPage();
@@ -27,7 +28,6 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    @Tag("Login")
     @DisplayName("TC-0002 | Verify invalid login")
     public void verifyInvalidLogin() {
         LandingPage home = new LandingPage();
@@ -39,7 +39,6 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    @Tag("Login")
     @DisplayName("TC-0003 | Verify locked-out user")
     public void verifyLockedOutUser() {
         LandingPage home = new LandingPage();

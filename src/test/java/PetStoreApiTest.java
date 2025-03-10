@@ -12,6 +12,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("Api")
 @DisplayName("Pet Store API Tests")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PetStoreApiTest {

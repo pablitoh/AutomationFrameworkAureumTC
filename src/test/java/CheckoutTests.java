@@ -15,10 +15,12 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("UI")
+@Tag("Checkout")
 @DisplayName("Checkout Tests")
 public class CheckoutTests extends ValidUserTest {
+
     @Test
-    @Tag("Checkout")
     @Tag("Integration")
     @Description("Verify checkout overview with three products")
     @DisplayName("TC-0008 | Verify checkout overview with three products")

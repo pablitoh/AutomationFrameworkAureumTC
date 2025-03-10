@@ -1,0 +1,65 @@
+{
+  "valid_user": {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john.doe@example.com",
+    "address": "123 Main St, Springfield, USA",
+    "postalCode": "12345"
+  },
+  "invalid_user": {
+    "username": "standard_user",
+    "password": "wrong_password",
+    "first_name": "Pablo",
+    "last_name": "Test",
+    "email": "pablo.test@example.com",
+    "address": "123 Main St, Springfield, USA",
+    "postalCode": "12345"
+  },
+  "locked_out_user": {
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "first_name": "Alice",
+    "last_name": "Smith",
+    "email": "alice.smith@example.com",
+    "address": "456 Elm St, Metropolis, USA",
+    "postalCode": "23456"
+  },
+  "problem_user": {
+    "username": "problem_user",
+    "password": "secret_sauce",
+    "first_name": "Bob",
+    "last_name": "Brown",
+    "email": "bob.brown@example.com",
+    "address": "789 Oak St, Gotham, USA",
+    "postalCode": "34567"
+  },
+  "performance_glitch_user": {
+    "username": "performance_glitch_user",
+    "password": "secret_sauce",
+    "first_name": "Charlie",
+    "last_name": "Wilson",
+    "email": "charlie.wilson@example.com",
+    "address": "101 Pine St, Star City, USA",
+    "postalCode": "45678"
+  },
+  "error_user": {
+    "username": "error_user",
+    "password": "secret_sauce",
+    "first_name": "Diana",
+    "last_name": "Taylor",
+    "email": "diana.taylor@example.com",
+    "address": "202 Birch St, Central City, USA",
+    "postalCode": "56789"
+  },
+  "visual_user": {
+    "username": "visual_user",
+    "password": "secret_sauce",
+    "first_name": "Ethan",
+    "last_name": "Clark",
+    "email": "ethan.clark@example.com",
+    "address": "303 Maple St, Coast City, USA",
+    "postalCode": "67890"
+  }
+}
