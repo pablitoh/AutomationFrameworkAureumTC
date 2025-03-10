@@ -1,6 +1,7 @@
 # Gradle files
 .gradle/
 build/
+allure-results/
 
 # IntelliJ IDEA files
 .idea/
