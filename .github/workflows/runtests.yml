@@ -1,4 +1,4 @@
-name: Run Tests [Dev]
+name: Run Tests
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:  # Enables manual triggering
 
 jobs:
   test-and-deploy:
@@ -37,6 +38,7 @@ jobs:
       - name: Deploy Allure Report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: allure-pages
           clean: true
