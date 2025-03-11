@@ -1,4 +1,4 @@
-name: Allure Report Deployment
+name: Run Tests [Dev]
 
 on:
   push:
@@ -34,9 +34,10 @@ jobs:
           mkdir -p allure-pages
           cp -r build/reports/allure-report/* allure-pages/
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy Allure Report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: allure-pages
           clean: true
+          single-commit: true
