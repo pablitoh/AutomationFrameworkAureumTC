@@ -25,7 +25,7 @@ on:
           - firefox
 
 jobs:
-  test-and-deploy:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -43,15 +43,15 @@ jobs:
 
       - name: Run tests in headless mode
         run: |
-          ./gradlew clean test -Dheadless=true -Denv=${{ github.event.inputs.env || 'qa' }} -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
+          ./gradlew clean test -Dheadless=true -Denv=${{ github.event.inputs.env }} -Dbrowser=${{ github.event.inputs.browser }}
         continue-on-error: true
 
-      - name: Generate Allure Report (Even if tests fail)
+      - name: Generate Allure Report
         run: |
           ./gradlew allureReport || true
           mkdir -p allure-pages
           cp -r build/reports/allure-report/* allure-pages/
-          touch allure-pages/.nojekyll  # Prevent GitHub Pages from treating it as a Jekyll site
+          touch allure-pages/.nojekyll
 
       - name: Deploy Allure Report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
