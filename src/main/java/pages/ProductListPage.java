@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Allure;
 import models.Product;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -37,6 +38,7 @@ public class ProductListPage extends BasePage {
      */
     public ProductListPage selectSortOption(String sortOption) {
         WebElement dropdown = getElement(sortDropdown);
+        Allure.step("Selecting sort option: " + sortOption);
         Select select = new Select(dropdown);
         select.selectByVisibleText(sortOption);
         return this;

@@ -67,7 +67,7 @@ public class PetStoreApiTest {
                 .then()
                 .statusCode(200)
                 .extract().asString();
-        
+
         JsonPath jsonResponse = JsonPath.from(response);
         availablePetIds = jsonResponse.getList("id", Long.class);
         Allure.step("Available pets: " + availablePetIds);
@@ -82,7 +82,6 @@ public class PetStoreApiTest {
         Assumptions.assumeTrue(!availablePetIds.isEmpty(), "No available pets found");
         long petId = availablePetIds.get(0);
         Allure.step("Retrieving pet with ID: " + petId);
-
         String response = given()
                 .when()
                 .get(RestAssured.baseURI + "/pet/" + petId)
@@ -103,9 +102,11 @@ public class PetStoreApiTest {
         long petId = availablePetIds.get(0);
         String updatedStatus = "sold";
         String body = "{\"id\":" + petId + ",\"status\":\"" + updatedStatus + "\"}";
+
         Allure.step("Retrieving pet with ID: " + petId);
         Allure.step("Request body:" + body);
         Allure.step("Updating pet status to: " + updatedStatus);
+
         String response = given()
                 .contentType(ContentType.JSON)
                 .body(body)

@@ -74,7 +74,6 @@ public class BasePage {
      * @param locator The By locator of the element.
      */
     public void click(By locator) {
-
         Allure.step("Clicking on element" + locator.toString());
         click(locator, DEFAULT_TIMEOUT);
     }
@@ -86,6 +85,7 @@ public class BasePage {
      * @param timeout Timeout in seconds to wait for the element.
      */
     public void click(By locator, int timeout) {
+        Allure.step("Clicking" + locator.toString());
         getElement(locator, timeout).click();
     }
 
@@ -110,6 +110,7 @@ public class BasePage {
      */
     public void sendKeys(By locator, String text, int timeout) {
         WebElement element = getElement(locator, timeout);
+        Allure.step("Sending keys to element" + locator.toString());
         element.clear(); // Clear the input field before typing
         element.sendKeys(text);
     }

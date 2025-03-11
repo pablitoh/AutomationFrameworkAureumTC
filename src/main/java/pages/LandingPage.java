@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Allure;
 import models.User;
 import org.openqa.selenium.By;
 import pages.setup.BasePage;
@@ -17,6 +18,7 @@ public class LandingPage extends BasePage {
 
     //methods to fill the form and submit
     public void fillLoginForm(String username, String password) {
+        Allure.step("Fill login form with username: " + username + " and password: " + password);
         getElement(usernameInput).sendKeys(username);
         getElement(passwordInput).sendKeys(password);
         getElement(loginButton).click();
@@ -28,6 +30,7 @@ public class LandingPage extends BasePage {
     }
 
     public ProductListPage login(User user) {
+        Allure.step("Login with username: " + user.getUsername() + " and password: " + user.getPassword());
         fillLoginForm(user.getUsername(), user.getPassword());
         return new ProductListPage();
     }
