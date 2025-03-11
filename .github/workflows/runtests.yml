@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Test
 
 on:
   push:
@@ -43,10 +43,16 @@ jobs:
 
       - name: Run tests in headless mode
         run: |
-          ./gradlew clean test -Dheadless=true -Denv=${{ github.event.inputs.env }} -Dbrowser=${{ github.event.inputs.browser }}
+          ./gradlew clean test -Dheadless=true -Denv=${{ github.event.inputs.env || 'qa' }} -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
         continue-on-error: true
 
-      - name: Generate Allure Report (Ensure Correct Path)
+      - name: Upload Allure Results as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: build/allure-results
+
+      - name: Generate Allure Report
         run: |
           ./gradlew allureReport || true
           mkdir -p allure-pages
