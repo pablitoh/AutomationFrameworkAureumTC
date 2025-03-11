@@ -25,7 +25,7 @@ public class CheckoutTests extends ValidUserTest {
     @Description("Verify checkout overview with three products")
     @DisplayName("TC-0008 | Verify checkout overview with three products")
     public void verifyCheckoutOverview() {
-        Allure.step("Add three products to cart");
+        Allure.step("Add products to cart");
         ProductListPage productListPage = new ProductListPage();
         List<String> productNames = TestDataManager.getThreeRandomProductNames();
 

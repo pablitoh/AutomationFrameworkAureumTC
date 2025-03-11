@@ -54,28 +54,7 @@ public class CartPage extends BasePage {
                     cartProduct.getDescription().equals(expected.getDescription());
         });
     }
-
-    /**
-     * Retrieves all product names in the cart.
-     *
-     * @return List of product names.
-     */
-    public List<String> getCartItemNames() {
-        return getElements(CART_ITEMS)
-                .stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Removes all items from the cart.
-     */
-    public void removeAllItemsFromCart() {
-        List<WebElement> removeButtons = getElements(REMOVE_BUTTONS);
-        for (WebElement button : removeButtons) {
-            button.click();
-        }
-    }
+    
 
     public CheckoutPage proceedToCheckout() {
         click(CHECKOUT_BUTTON);

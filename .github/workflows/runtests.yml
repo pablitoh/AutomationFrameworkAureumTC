@@ -1,4 +1,4 @@
-name: Run Test
+name: Run Tests and Publish Allure Report
 
 on:
   push:
@@ -30,10 +30,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up JDK 11
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -41,29 +41,31 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x ./gradlew
 
-      - name: Run tests in headless mode
+      - name: Run tests
         run: |
           ./gradlew clean test -Dheadless=true -Denv=${{ github.event.inputs.env || 'qa' }} -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
         continue-on-error: true
 
-      - name: Upload Allure Results as Artifact
-        uses: actions/upload-artifact@v4
+      - name: Load test report history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
         with:
-          name: allure-results
-          path: build/allure-results
+          ref: gh-pages
+          path: gh-pages
 
-      - name: Generate Allure Report
-        run: |
-          ./gradlew allureReport || true
-          mkdir -p allure-pages
-          cp -r build/reports/allure-report/allureReport/* allure-pages/
-          touch allure-pages/.nojekyll
-
-      - name: Deploy Allure Report to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Build test report
+        uses: simple-elf/allure-report-action@v1.12
+        if: always()
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: allure-pages
-          clean: true
-          single-commit: true
+          gh_pages: gh-pages
+          allure_history: allure-history
+          allure_results: allure-results
+
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history

@@ -1,3 +1,4 @@
+import io.qameta.allure.Allure;
 import jdk.jfr.Description;
 import models.Product;
 import org.junit.jupiter.api.DisplayName;
@@ -24,6 +25,7 @@ public class CartTests extends ValidUserTest {
     public void verifySpecificProductsInCart() {
         ProductListPage productListPage = new ProductListPage();
         List<String> productNames = TestDataManager.getAllProductNames();
+        Allure.step("Add products to cart:" + productNames);
         // Retrieve full product details before adding to the cart
         List<Product> expectedProducts = productNames.stream()
                 .map(productListPage::getProductDetails) // Get price and description
