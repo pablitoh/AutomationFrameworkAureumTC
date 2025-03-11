@@ -6,10 +6,6 @@ on:
       - main
   workflow_dispatch:
     inputs:
-      branch:
-        description: 'Branch to run tests on'
-        required: true
-        default: 'main'
       env:
         description: 'Test environment'
         required: true
