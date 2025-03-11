@@ -26,7 +26,6 @@ public class InventoryTests extends ValidUserTest {
     @DisplayName("TC-0005 | Verify sorting options by Price (high to low)")
     public void verifySortingHighToLow() {
         ProductListPage productListPage = new ProductListPage();
-
         productListPage.selectSortOption("Price (high to low)");
         assertThat(productListPage.getProductPrices())
                 .as("Verify product prices are sorted in descending order")

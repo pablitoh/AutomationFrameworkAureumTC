@@ -2,6 +2,7 @@
 .gradle/
 build/
 allure-results/
+allure-report/
 
 # IntelliJ IDEA files
 .idea/

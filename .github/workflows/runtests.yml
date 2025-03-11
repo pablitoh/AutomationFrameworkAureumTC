@@ -41,7 +41,7 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x ./gradlew
 
-      - name: Run tests (headless)
+      - name: Run tests
         run: |
           ./gradlew clean test -Dheadless=true -Denv=${{ github.event.inputs.env || 'qa' }} -Dbrowser=${{ github.event.inputs.browser || 'chrome' }}
         continue-on-error: true

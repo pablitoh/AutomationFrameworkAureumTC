@@ -1,5 +1,7 @@
 package pages.setup;
 
+
+import io.qameta.allure.Allure;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -35,7 +37,7 @@ public class BasePage {
      */
     public WebElement getElement(By locator) {
 
-
+        Allure.step("Getting element" + locator.toString());
         return getElement(locator, DEFAULT_TIMEOUT);
     }
 
@@ -72,6 +74,8 @@ public class BasePage {
      * @param locator The By locator of the element.
      */
     public void click(By locator) {
+
+        Allure.step("Clicking on element" + locator.toString());
         click(locator, DEFAULT_TIMEOUT);
     }
 
@@ -92,6 +96,8 @@ public class BasePage {
      * @param text    The text to enter into the element.
      */
     public void sendKeys(By locator, String text) {
+
+        Allure.step("Sending keys to element" + locator.toString());
         sendKeys(locator, text, DEFAULT_TIMEOUT);
     }
 
