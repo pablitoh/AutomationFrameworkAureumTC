@@ -1,4 +1,5 @@
 import io.qameta.allure.Allure;
+import io.qameta.allure.Epic;
 import jdk.jfr.Description;
 import models.Product;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("UI")
 @Tag("Checkout")
+@Epic("Checkout")
 @DisplayName("Checkout Tests")
 public class CheckoutTests extends ValidUserTest {
 
@@ -42,6 +44,8 @@ public class CheckoutTests extends ValidUserTest {
                         .proceedToCheckout()
                         .fillCheckoutForm(getUser())
                         .submitCheckout();
+
+        Allure.step("Verify checkout overview");
 
         assertThat(checkoutOverview.areProductsCorrect(expectedProducts))
                 .as("Verify that the correct products and prices are in checkout overview")

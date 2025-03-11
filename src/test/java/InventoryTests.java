@@ -1,3 +1,4 @@
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ public class InventoryTests extends ValidUserTest {
     public void verifySortingLowToHigh() {
         ProductListPage productListPage = new ProductListPage();
         productListPage.selectSortOption("Price (low to high)");
+        Allure.step("Verify product prices are sorted in ascending order");
         assertThat(productListPage.getProductPrices())
                 .as("Verify product prices are sorted in ascending order")
                 .isSorted();
@@ -27,6 +29,7 @@ public class InventoryTests extends ValidUserTest {
     public void verifySortingHighToLow() {
         ProductListPage productListPage = new ProductListPage();
         productListPage.selectSortOption("Price (high to low)");
+        Allure.step("Verify product prices are sorted in descending order");
         assertThat(productListPage.getProductPrices())
                 .as("Verify product prices are sorted in descending order")
                 .isSortedAccordingTo((a, b) -> Double.compare(b, a));
@@ -38,6 +41,7 @@ public class InventoryTests extends ValidUserTest {
     public void verifySortingNameAToZ() {
         ProductListPage productListPage = new ProductListPage();
         productListPage.selectSortOption("Name (A to Z)");
+        Allure.step("Verify product names are sorted in ascending alphabetical order");
         assertThat(productListPage.getProductNames())
                 .as("Verify product names are sorted in ascending alphabetical order")
                 .isSorted();
@@ -50,6 +54,7 @@ public class InventoryTests extends ValidUserTest {
         ProductListPage productListPage = new ProductListPage();
 
         productListPage.selectSortOption("Name (Z to A)");
+        Allure.step("Verify product names are sorted in descending alphabetical order");
         assertThat(productListPage.getProductNames())
                 .as("Verify product names are sorted in descending alphabetical order")
                 .isSortedAccordingTo((a, b) -> b.compareTo(a));
