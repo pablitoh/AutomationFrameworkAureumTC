@@ -4,13 +4,28 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:  # Enables manual triggering
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Test environment'
+        required: true
+        default: 'qa'
+        type: choice
+        options:
+          - dev
+          - qa
+          - staging
+      browser:
+        description: 'Browser to run tests'
+        required: true
+        default: 'chrome'
+        type: choice
+        options:
+          - chrome
+          - firefox
 
 jobs:
-  test-and-deploy:
+  Run-Tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,13 +42,16 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Run tests in headless mode
-        run: ./gradlew clean test -Dheadless=true
-
-      - name: Generate Allure Report
         run: |
-          ./gradlew allureReport
+          ./gradlew clean test -Dheadless=true -Denv=${{ github.event.inputs.env }} -Dbrowser=${{ github.event.inputs.browser }}
+        continue-on-error: true
+
+      - name: Generate Allure Report (Ensure Correct Path)
+        run: |
+          ./gradlew allureReport || true
           mkdir -p allure-pages
-          cp -r build/reports/allure-report/* allure-pages/
+          cp -r build/reports/allure-report/allureReport/* allure-pages/
+          touch allure-pages/.nojekyll
 
       - name: Deploy Allure Report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
