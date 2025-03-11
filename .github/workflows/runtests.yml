@@ -46,17 +46,18 @@ jobs:
           ./gradlew clean test -Dheadless=true -Denv=${{ github.event.inputs.env }} -Dbrowser=${{ github.event.inputs.browser }}
         continue-on-error: true
 
-      - name: Generate Allure Report
+      - name: Generate Allure Report (Ensure Correct Path)
         run: |
           ./gradlew allureReport || true
-          cp -r build/reports/allure-report/* ./
-          touch .nojekyll
+          mkdir -p allure-pages
+          cp -r build/reports/allure-report/allureReport/* allure-pages/
+          touch allure-pages/.nojekyll
 
       - name: Deploy Allure Report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
-          folder: .
+          folder: allure-pages
           clean: true
           single-commit: true
